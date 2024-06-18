@@ -1,0 +1,122 @@
+COMP 321 Project 3: Linking
+Yuqi Chen yc138 Zikang Chen zc45
+
+---(Do not write lines of text that exceed the width of this line.)------------
+
+PROBLEM 7.6
+
+<Replace with the answer to problem 7.6.>
+
+Symbol (swap.o .symtab entry?) (Symbol type) (Module where defined) (Section)
+buf            yes                extern             m.o              .data
+bufp0          yes                global             swap.o           .data
+bufp1          yes                local              swap.o           .bss
+swap           yes                global             swap.o           .text
+temp           no                 N/A                N/A              N/A
+incr           yes                local              swap.o           .text
+count          yes                local              swap.o           .bss
+
+
+PROBLEM 7.9
+
+<Replace with the answer to problem 7.9.>
+We have one main function and one variable main which is of type character.
+Main function is initialized while character main is not. In this case,
+main function is strongly declared while character main is weakly declared.
+Therefore, when we compiled and execute this, it will ignore the weakly 
+declared main character, and only consider the strongly declared main
+function. Finally, consider the main in line 8 as the address of the 
+strongly declared main function and prints it.
+
+PROBLEM 7.12
+
+<Replace with the answer to problem 7.12.>
+Part (A)
+ADDR(S) = ADDR(.text) = 0x4004e0
+ADDR(r.symbol) = ADDR(swap) = 0x4004f8
+Using the algorithm in Figure 7.10, the linker computes the run time 
+address of the reference.
+refaddr = ADDR(S) + r.offset = 0x4004e0 + 0xa = 0x4004ea
+It then updates the reference so that it will point to the swap routine at 
+run time.
+*refptr = (unsigned) (ADDR(r.symbol)) + r.addend - refaddr)
+= (unsigned) (0x4004f8 + (-4) - 0x4004ea)
+= 0xa
+
+Part (B)
+ADDR(S) = ADDR(.text) = 0x4004d0
+ADDR(r.symbol) = ADDR(swap) = 0x400500
+Using the algorithm in Figure 7.10, the linker computes the run time 
+address of the reference.
+refaddr = ADDR(S) + r.offset = 0x4004d0 + 0xa = 0x4004da
+It then updates the reference so that it will point to the swap routine at 
+run time.
+*refptr = (unsigned) (ADDR(r.symbol)) + r.addend - refaddr)
+= (unsigned) (0x400500 + (-4) - 0x4004da)
+= 0x22
+
+READJCF
+
+TESTING STRATEGY
+
+<Replace with a detailed description of your testing strategy.>
+- The input java class file is empty. Test if it returns the expected 
+result.
+- The input java class file is not empty. Test if it returns the expected 
+result.
+- The input java class file has no or one or multiple methods.
+- The input java class file has no or one or multiple variables.
+- The input java class file has no or one or multiple superclasses.
+- The input java class file has no or one or multiple subclasses.
+- The input java class file has no or one or multiple fields.
+- The input java class file has no or one or multiple interfaces.
+- The input java class file itself is an abstract class.
+- The input java class file itself is an interface.
+- Test dependencies and exports should be printed in the order that they 
+are encountered in the JCF.
+- Test the file has no or one or multiple dependencies. Test if they 
+are printed correctly in order.
+- Test the file has no or one or multiple exports. Test if they are 
+printed correctly in order.
+- Test the self-references are printed correctly.
+- Test all data are byteswapped correctly.
+- Test the UTF-8 strings in the constant pool are NUL-terminated correctly.
+- Test the case when the UTF-8 strings in the constant pool can be zero 
+bytes long. Test if it returns the expected result.
+- Test the JCF CONSTANT Long and JCF CONSTANT Double constants occupy 
+two spots in the constant pool.
+- Test the case when the ACC PUBLIC flag is set.
+- Test the java class file where the size of the interface array is 0, 1 
+or more.
+- Test the java class file where the size of the attribute array is 0, 1 
+or more.
+- Test the java class file where the size of the bytes array is 0, 1 
+or more.
+- Test the java class file where the size of the fields array is 0, 1 
+or more.
+- Test the java class file where the size of the methods array is 0, 1 
+or more.
+- Test the java class file where the size of the constant pool array is 
+0, 1 or more.
+- Test the types of the constants in the array match the corresponding tag.
+- Test it verifies that all indices into the constant pool that are 
+followed while printing the dependencies and exports are valid and 
+the constant at that index is of the expected type (according to its tag).
+- Test it verifies that the magic number is 0xCAFEBABE.
+- Test it verifies that the class file is not truncated and does not 
+contain extra bytes.
+- Test any java class file that fails 27-29 it will print an error 
+message to stderr, then immediately quit.
+
+
+TWO THINGS I LEARNED
+
+<Replace with a description of two features of C that are used in the
+ provided code for this assignment but weren't taught in lecture or lab
+ that you learned about while completing this assignment.>
+ - Converting a void* pointer to unsigned int is inherently non-portable. 
+ The possible difference in size is part of the problem which can be solved 
+ by using uintptr_t.
+ - Cast a pointer to a struct should write the * inside and at the end 
+ of the parenthesis.
+
