@@ -1,1 +1,4 @@
 # Linking
+The implementation of readjcf program.
+
+The compilation and execution of Java programs has both similarities and differences with respect to C programs. First, the javac compiler does not output x86-64 ELF ﬁles. It outputs ﬁles that are instead in the Java Class File (JCF) format. Second, the machine code within these ﬁles is not x86-64 machine code. It is machine code for a hypothetical computer called the Java Virtual Machine (JVM). Essentially, on CLEAR, this machine code is executed by a very fast JVM simulator 3 . Nonetheless, there are many conceptual similarities between the JCF and ELF ﬁle formats. In other words, to link together a Java program consisting of many classes, the JCF format must support many of the same features as the ELF ﬁle format. We learn about these similarities and differences through the implementation of the readjcf program.
